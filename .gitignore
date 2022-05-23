@@ -10,7 +10,9 @@
 
 /Logs
  
+/Packages
 
+/.idea
 # ----[ Visual Studio / MonoDevelop generated ]------- #
 
  
@@ -54,3 +56,4 @@ Icon?
 ehthumbs.db
 
 Thumbs.db
+Packages/packages-lock.json
