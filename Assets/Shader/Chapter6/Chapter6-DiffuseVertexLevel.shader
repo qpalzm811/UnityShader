@@ -21,23 +21,20 @@
 			struct a2v
 			{
 				float4 vertex : POSITION;
-				float3 normal : NORMAL;
+				float3 normal : NORMAL; //访问法线
 			};
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;
-				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
+				fixed3 color : COLOR;   //接收顶点着色 计算完成的光照颜色，也可以用TEXTCOORD0
 			};
 			
-			v2f vert (appdata v)
+			v2f vert (a2v v)
 			{
+				//逐顶点 漫反射光照，都在顶点着色器进行
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				UNITY_TRANSFER_FOG(o,o.vertex);
-				return o;
+				o.pos = UnityObjectToClipPos(v.vertex)
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
