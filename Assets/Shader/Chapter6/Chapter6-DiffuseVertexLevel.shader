@@ -34,7 +34,9 @@
 			{
 				//逐顶点 漫反射光照，都在顶点着色器进行
 				v2f o;
-				o.pos = UnityObjectToClipPos(v.vertex)
+				o.pos = UnityObjectToClipPos(v.vertex);
+
+				fixed3 ambient
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
