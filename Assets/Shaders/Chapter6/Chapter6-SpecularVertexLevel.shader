@@ -6,18 +6,18 @@
 	}
 	SubShader {
 		Pass { 
-			Tags { "LightMode"="ForwardBase" }
-			
+			Tags { "LightMode"="ForwardBase" }  
+			// 指明光照模式，正确的LightMode才能得到内置光照变量，例如_LightColor0
 			CGPROGRAM
 			
 			#pragma vertex vert
 			#pragma fragment frag
 			
-			#include "Lighting.cginc"
+			#include "Lighting.cginc" // 为了使用内置变量 _LightColor0
 			
-			fixed4 _Diffuse;
+			fixed4 _Diffuse;    //颜色 0-1，所以可用fixed
 			fixed4 _Specular;
-			float _Gloss;
+			float _Gloss;       //范围大用 float
 			
 			struct a2v {
 				float4 vertex : POSITION;
