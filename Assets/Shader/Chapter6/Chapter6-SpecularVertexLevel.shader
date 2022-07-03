@@ -57,7 +57,7 @@
 				
 				// Compute specular term
 				// 得到了四个参数，代入公式计算
-				//                入射光线颜色和强度    材质高光反射系数
+				//                入射光线颜色和强度    材质高光反射系数                   反射方向     视角方向    高光点大小
 				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(saturate(dot(reflectDir, viewDir)), _Gloss);
 				
 				o.color = ambient + diffuse + specular;

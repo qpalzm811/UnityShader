@@ -54,7 +54,7 @@
 				// Compute diffuse term
 				fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * max(0, dot(worldNormal, worldLightDir));
 				
-				// Get the view direction in world space
+				// Get the view direction in world space 和Phong模型区别开始
 				fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
 				// Get the half direction in world space
 				fixed3 halfDir = normalize(worldLightDir + viewDir);

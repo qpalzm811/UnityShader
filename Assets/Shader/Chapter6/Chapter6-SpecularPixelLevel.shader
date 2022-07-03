@@ -35,7 +35,8 @@
 				// Transform the vertex from object space to projection space
 				o.pos = UnityObjectToClipPos(v.vertex);
 				
-				// Transform the normal from object space to world space
+				// 求得世界空间的 Postion Normal
+				// Transform the normal from $$ object space to world space $$
 				o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);
 				// Transform the vertex from object spacet to world space
 				o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
@@ -44,20 +45,22 @@
 			}
 			
 			fixed4 frag(v2f i) : SV_Target {
-				// Get ambient term
+				// Get ambient term 环境光
 				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
-				
+				// 法线方向
 				fixed3 worldNormal = normalize(i.worldNormal);
+			    // 世界空间光的方向
 				fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);
 				
-				// Compute diffuse term
+				// Compute diffuse term 漫反射
 				fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(dot(worldNormal, worldLightDir));
 				
-				// Get the reflect direction in world space
+				// Get the reflect direction in world space 世界空间 反射光方向
 				fixed3 reflectDir = normalize(reflect(-worldLightDir, worldNormal));
-				// Get the view direction in world space
+				// Get the view direction in world space 世界空间视角方向
 				fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
 				// Compute specular term
+                //                入射光线颜色和强度    材质高光反射系数                   反射方向     视角方向    高光点大小
 				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(saturate(dot(reflectDir, viewDir)), _Gloss);
 				
 				return fixed4(ambient + diffuse + specular, 1.0);
